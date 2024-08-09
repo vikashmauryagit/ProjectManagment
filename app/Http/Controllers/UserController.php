@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function show()
+    {
+        return view('Admin.dashboard');
+    }
+
     public function Adminlogin(Request $request)
     {
         $data = $request->validate([
@@ -16,12 +21,29 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
+        // if (Auth::attempt($data)) {
+        //     return view('Admin.dashboard');
+        // } else {
+        //     return redirect()->route('login')->with('status', "Please Enter Correct Credencials..");
+        // }
+
         if (Auth::attempt($data)) {
-            return view('Admin.dashboard');
-        } else {
-            return redirect()->route('login')->with('status', "Please Enter Correct Credencials..");
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->route('show');
+            }
+            elseif($user->role ==='employee')
+            {
+                return redirect()->route('projectview');
+            }
+            else
+            {
+                return redirect()->route('login')->with('status',"Please Enter Correct credential..");
+            }
         }
     }
+
 
 
     public function create()
@@ -85,5 +107,13 @@ class UserController extends Controller
         }
 
         return view('Users.table', compact('data'));
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }

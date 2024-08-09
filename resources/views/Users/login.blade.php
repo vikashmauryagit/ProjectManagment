@@ -35,9 +35,9 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                           @session('status')
-                            <span class="text-danger">{{session('status')}}</span>   
-                           @endsession
+                            @session('status')
+                                <span class="text-danger">{{ session('status') }}</span>
+                            @endsession
                             <button type="submit" class="btn btn-primary col-12">Submit</button>
                         </form>
                     </div>

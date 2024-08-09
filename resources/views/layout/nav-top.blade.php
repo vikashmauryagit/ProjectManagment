@@ -15,28 +15,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        {{-- <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li> --}}
+       
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -138,5 +117,15 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <div class="dropdown me-4">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span><i class="bi bi-people"></i> {{Auth::user()->name}}</span>
+            </button>
+            <ul class="dropdown-menu p-0 m-0">
+              <li><a class="dropdown-item bg-danger rounded btn-sm fw-bold " href="{{route('logout')}}">Logout <i class="bi bi-box-arrow-right"></i></a></li>
+             
+            </ul>
+          </div>
+        
     </ul>
 </nav>

@@ -21,15 +21,18 @@ use function Laravel\Prompts\search;
 */
 
 Route::get('/', function () {
-    return view ('Users/login');
+    return view('Users.login');
 })->name('login');
 
 Route::post('/adminlogin', [UserController::class, 'Adminlogin'])->name('adminlogin');
-
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/show', [UserController::class, 'show'])->name('show');
 Route::get('/employee', [UserController::class, 'create'])->name('employee');
 Route::post('/employeeregister', [UserController::class, 'store'])->name('employeeregi');
 Route::get('/employeeindex', [UserController::class, 'index'])->name('employindex');
 Route::get('/user/search', [UserController::class, 'search'])->name('user.search');
 
+
 Route::resource('project', ProjectController::class);
+Route::get('/viewproject', [ProjectController::class, 'view'])->name('projectview');
 Route::get('/search/project', [ProjectController::class, 'search'])->name("project.search");

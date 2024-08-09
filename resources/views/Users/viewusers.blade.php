@@ -20,7 +20,7 @@
             </div>
             <div class="card">
                 @session('success')
-                    <span class="text-danger fs-5">{{ session('success') }}</span>
+                    <span class="text-danger  text-danger fs-4">{{ session('success') }}</span>
                 @endsession
                 <div class="card-header p-0">
                     <table class="table">

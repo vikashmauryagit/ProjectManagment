@@ -1,119 +1,8 @@
 @extends('layout.frontend')
 
 
-{{-- @section('content')
-    <section class="content">
-
-        <h1 class="text-center text-danger border-bottom borer-2 border-danger">Add Project</h1>
-        <form action="{{ route('project.store') }}" method="post">
-            <div class="row mx-5 border bg-light p-3 mt-1">
-
-                @csrf
-                <div class="col-4">
-                    <label for="" class="m-1">Project Name<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="project name" name="name">
-                    @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-4">
-                    <label for="" class="m-1">Client<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="Last name" name="client">
-                    @error('client')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-4">
-                    <label for="" class="m-1">Status<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="enter status" name="status">
-                    @error('status')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="col-12">
-                    <label for="inputDescription" class="m-1">Project Description<span
-                            class="text-danger">*</span></label>
-                    <textarea id="inputDescription" class="form-control" rows="4" name="description"></textarea>
-                    @error('description')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-4">
-                    <label for="" class="m-1">Contact Person<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="First name" name="contact">
-                    @error('contact')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-4">
-                    <label for="" class="m-1">Start-Date<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control" placeholder="enter start date" name="startdate">
-                    @error('startdate')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-4">
-                    <label for="" class="m-1">End-Date<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control" placeholder="enter end date" name="enddate">
-                    @error('enddate')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-4 mt-2">
-                    <div class="">
-                        <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            placeholder="assign  to developer">
-                            Assign to Developer
-                        </button>
-                        <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox1" class="item"
-                                    name="members[]" value="faizan">
-                                <label class="form-check-label" for="checkbox1">Faizan</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox2" class="item"
-                                    name="members[]" value="vikash">
-                                <label class="form-check-label" for="checkbox2">Vikash</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox3" class="item"
-                                    name="members[]" value="abhisek">
-                                <label class="form-check-label" for="checkbox3">Abhisek</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox3" class="item"
-                                    name="members[]" value="rachit">
-                                <label class="form-check-label" for="checkbox3">Rachit</label>
-                            </div>
-                        </div>
-                    </div>
-                    </select>
-                    @error('members')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="mt-4">
-                    <p class="child"></p>
-                </div>
-
-                <div class="col-12 my-3">
-                    <button class="btn btn-primary  col-12 text-light p-1">Submit</button>
-                </div>
-        </form>
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-    </section>
-@endsection --}}
 @section('content')
-    <section class="content">
-
+    <section class="">
         <h1 class="text-center text-danger border-bottom border-2 border-danger">Add Project</h1>
         <form action="{{ route('project.store') }}" method="post">
             <div class="row mx-5 border bg-light p-3 mt-1">
@@ -141,7 +30,8 @@
                 </div>
 
                 <div class="col-12">
-                    <label for="inputDescription" class="m-1">Project Description<span class="text-danger">*</span></label>
+                    <label for="inputDescription" class="m-1">Project Description<span
+                            class="text-danger">*</span></label>
                     <textarea id="inputDescription" class="form-control" rows="4" name="description"></textarea>
                     @error('description')
                         <span class="text-danger">{{ $message }}</span>
@@ -156,7 +46,8 @@
                 </div>
                 <div class="col-4">
                     <label for="startdate" class="m-1">Start-Date<span class="text-danger">*</span></label>
-                    <input type="date" id="startdate" class="form-control" placeholder="Enter start date" name="startdate">
+                    <input type="date" id="startdate" class="form-control" placeholder="Enter start date"
+                        name="startdate">
                     @error('startdate')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -177,19 +68,23 @@
                         </button>
                         <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox1" name="members[]" value="faizan">
+                                <input type="checkbox" class="form-check-input" id="checkbox1" name="members[]"
+                                    value="faizan">
                                 <label class="form-check-label" for="checkbox1">Faizan</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox2" name="members[]" value="vikash">
+                                <input type="checkbox" class="form-check-input" id="checkbox2" name="members[]"
+                                    value="vikash">
                                 <label class="form-check-label" for="checkbox2">Vikash</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox3" name="members[]" value="abhisek">
+                                <input type="checkbox" class="form-check-input" id="checkbox3" name="members[]"
+                                    value="abhisek">
                                 <label class="form-check-label" for="checkbox3">Abhisek</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox4" name="members[]" value="rachit">
+                                <input type="checkbox" class="form-check-input" id="checkbox4" name="members[]"
+                                    value="rachit">
                                 <label class="form-check-label" for="checkbox4">Rachit</label>
                             </div>
                         </div>
@@ -204,10 +99,6 @@
                 </div>
             </div>
         </form>
-{{-- 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script> --}}
     </section>
 @endsection
 

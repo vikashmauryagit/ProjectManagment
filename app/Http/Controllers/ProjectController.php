@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function view()
+    {
+        return view('Project.addProject');
+    }
     public function index()
     {
         $project = Project::paginate(5);

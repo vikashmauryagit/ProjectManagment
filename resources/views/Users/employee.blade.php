@@ -43,19 +43,20 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="col-4">
+            <input type="text" name="role" value="Employee" hidden>
+            {{-- <div class="col-4">
                 <div class="form-group">
-                    <label for="inputStatus m-0">Role<span class="text-danger">*</span></label>
+                    <label for="inputStatus m-0 p-0">Role<span class="text-danger">*</span></label>
                     <select id="inputStatus" class="form-control custom-select" name="role">
                         <option selected disabled>role</option>
-                        <option value="admin">Admin</option>
+                        <option value="admin" hidden>Admin</option>
                         <option value="employee">Employee</option>
                     </select>
                     @error('role')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-12 my-3">
                 <button class="btn btn-primary  col-12 text-light p-1">Submit</button>
