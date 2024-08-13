@@ -28,34 +28,52 @@
                     <table class="table">
                         <thead class="bg-dark ">
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Contact Person</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                                <th scope="col">Assign Developer</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::User()->role !== 'admin')
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Project Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Assign Developer</th>
+                                @else
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Project Name</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Contact Person</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Assign Developer</th>
+                                    <th scope="col">Action</th>
+                                @endif
+
                             </tr>
+
                         </thead>
                         <tbody id="projectbody">
                             @foreach ($project as $data)
                                 <tr>
-                                    <th scope="row">{{ $data->id }}</th>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->status }}</td>
-                                    <td>{{ $data->description }}</td>
-                                    <td>{{ $data->contact }}</td>
-                                    <td>{{ $data->startdate }}</td>
-                                    <td>{{ $data->enddate }}</td>
-                                    <td>{{ $data->members }}</td>
-                                    <td class="d-flex">
-                                        <a href="{{ route('project.edit', $data->id) }}"><i
-                                                class="fa-solid fa-pen-to-square  fa-lg border p-2 rounded bg-info px-1"></i></a>
-                                        <a href=""><i
-                                                class="fa-regular fa-eye fa-lg border p-2  bg-danger rounded px-1"></i></a>
-                                    </td>
+                                    @if (Auth::User()->role !== 'admin')
+                                        <th scope="row">{{ $data->id }}</th>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->description }}</td>
+                                        <td>{{ $data->employee }}</td>
+                                    @else
+                                        <th scope="row">{{ $data->id }}</th>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->client }}</td>
+                                        <td>{{ $data->status }}</td>
+                                        <td>{{ $data->description }}</td>
+                                        <td>{{ $data->contact }}</td>
+                                        <td>{{ $data->startdate }}</td>
+                                        <td>{{ $data->enddate }}</td>
+                                        <td>{{ $data->employee }}</td>
+                                        <td class="d-flex">
+                                            <a href="{{ route('project.edit', $data->id) }}"><i
+                                                    class="fa-solid fa-pen-to-square  fa-lg border p-2 rounded bg-info px-1"></i></a>
+                                            <a href=""><i
+                                                    class="fa-regular fa-eye fa-lg border p-2  bg-danger rounded px-1"></i></a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -78,7 +96,7 @@
                 var query = $(this).val();
                 console.log("query:" + query);
                 $.ajax({
-                    url:'{{ route('project.search') }}',
+                    url: '{{ route('project.search') }}',
                     type: 'GET',
                     data: {
                         'query': query,
@@ -91,7 +109,4 @@
             });
         });
     </script>
-
-
-
 @endsection

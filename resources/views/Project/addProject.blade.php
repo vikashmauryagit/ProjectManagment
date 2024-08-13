@@ -7,6 +7,9 @@
         <form action="{{ route('project.store') }}" method="post">
             <div class="row mx-5 border bg-light p-3 mt-1">
                 @csrf
+                @foreach ($data as $item)
+                    <input type="hidden" name="emp_id" id="" value="{{$item->id}}">
+                @endforeach
                 <div class="col-4">
                     <label for="projectName" class="m-1">Project Name<span class="text-danger">*</span></label>
                     <input type="text" id="projectName" class="form-control" placeholder="project name" name="name">
@@ -60,36 +63,14 @@
                     @enderror
                 </div>
                 <div class="col-4 mt-2">
-                    <div class="">
-                        <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            placeholder="Assign to developer">
-                            Assign to Developer
-                        </button>
-                        <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox1" name="members[]"
-                                    value="faizan">
-                                <label class="form-check-label" for="checkbox1">Faizan</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox2" name="members[]"
-                                    value="vikash">
-                                <label class="form-check-label" for="checkbox2">Vikash</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox3" name="members[]"
-                                    value="abhisek">
-                                <label class="form-check-label" for="checkbox3">Abhisek</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox4" name="members[]"
-                                    value="rachit">
-                                <label class="form-check-label" for="checkbox4">Rachit</label>
-                            </div>
-                        </div>
-                    </div>
-                    @error('members')
+                    <select class="form-control" name="employee[]" id="emp">
+                        @foreach ($data as $dd)
+                        @if($dd->role === "employee")
+                            <option value="{{$dd->id}}">{{$dd->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @error('employee')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

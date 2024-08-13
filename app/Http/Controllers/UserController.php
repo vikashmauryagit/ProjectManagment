@@ -11,7 +11,8 @@ class UserController extends Controller
 {
     public function show()
     {
-        return view('Admin.dashboard');
+        $project = Project::all();
+        return view('Admin.dashboard', compact('project'));
     }
 
     public function Adminlogin(Request $request)
@@ -20,28 +21,22 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-
-        // if (Auth::attempt($data)) {
-        //     return view('Admin.dashboard');
-        // } else {
-        //     return redirect()->route('login')->with('status', "Please Enter Correct Credencials..");
-        // }
-
         if (Auth::attempt($data)) {
             $user = Auth::user();
 
             if ($user->role === 'admin') {
                 return redirect()->route('show');
-            }
-            elseif($user->role ==='employee')
-            {
+            } elseif ($user->role !== 'admin') {
                 return redirect()->route('projectview');
-            }
-            else
-            {
-                return redirect()->route('login')->with('status',"Please Enter Correct credential..");
+            } else {
+                return redirect()->route('login')->with('status', "Please Enter Correct credential..");
             }
         }
+    }
+
+    public function retrivedata()
+    {
+        return redirect()->route('show');
     }
 
 
@@ -70,7 +65,6 @@ class UserController extends Controller
         $user->designation = $request->designation;
         $user->role = $request->role;
         $user->save();
-
         return redirect()->route('employindex')->with('success', "data Store successfully..");
     }
     public function index(Request $request)
@@ -79,20 +73,7 @@ class UserController extends Controller
         return view('Users.viewusers', compact('users'));
     }
 
-    // public function search(Request $request)
-    // {
-    //     $query = $request->input('query');
-    //     $data = [];
-    //     if ($query !== "") {
-    //         $data = User::where('name', 'LIKE', "%{$query}%")
-    //             ->orWhere('email', 'LIKE', "%{$query}%")
-    //     } 
-    //     else
-    //     {
-    //         $data = User::all();
-    //     }
-    //     return view('Users.table', compact('data'));
-    // }
+    
     public function search(Request $request)
     {
         $query = $request->input('query');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +12,9 @@ class ProjectController extends Controller
 {
     public function view()
     {
-        return view('Project.addProject');
+        $data = DB::table('users')->get();
+        return view('Project.addProject', compact('data'));
+        // return $data;
     }
     public function index()
     {
@@ -23,7 +27,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('Project.addProject');
+        // $data=DB::User()->all();
+        $data = DB::table('users')->get();
+        // $data = User::all();
+        return view('Project.addProject', compact('data'));
     }
 
     /**
@@ -34,89 +41,40 @@ class ProjectController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'client' => 'required',
-            // 'status' => 'required',
+            'status' => 'required',
             'description' => 'required',
             'contact' => 'required',
             'startdate' => 'required',
             'enddate' => 'required',
-            'members' => 'required|array',
+            'employee' => 'required',
         ]);
 
         $project = new Project();
+        $project->emp_id = $request->emp_id;
         $project->name = $request->name;
         $project->client = $request->client;
-        // $project->status = $request->status;
+        $project->status = $request->status;
         $project->description = $request->description;
         $project->contact = $request->contact;
         $project->startdate = $request->startdate;
         $project->enddate = $request->enddate;
-        $project->members = json_encode($request->members);
+        $project->employee=$request->employee;
+        // $project->employee = explode(" ",$request->employee);
+        // $project->employee = json_encode(explode(" ", $request->employee));
+        $employees = $request->input('employee');
+        $project->employee = json_encode($employees);
         $project->save();
 
         return redirect()->route('project.index')->with('success', 'Data Store Successfully..');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $project = Project::find($id);
+        $user = DB::table('users')->get();
 
-        return view('Project.edit', compact('project'));
+        return view('Project.edit', compact('project', 'user'));
     }
-    // public function update(Request $request, string $id)
-    // {
-    //     $data = $request->validate([
-    //         'name' => 'required',
-    //         'client' => 'required',
-    //         'status' => 'required',
-    //         'description' => 'required',
-    //         'contact' => 'required',
-    //         'startdate' => 'required',
-    //         'enddate' => 'required',
-    //         'members' => 'required',
 
-    //     ]);
-
-    //     $project = Project::find($id);
-    //     $project->update([
-    //         "name" => $request->name,
-    //         "client" => $request->client,
-    //         "status" => $request->status,
-    //         "description" => $request->description,
-    //         'contact' => $request->contact,
-    //         'startdate' => $request->startdate,
-    //         'enddate' => $request->enddate,
-    //         'members' => JSON+($request->members)
-    //     ]);
-
-    //     // $project = Project::findOrFail($id);
-    //     // $members = isset($data['members']) ? (is_string($data['members'][0]) ? array_map('json_decode', $data['members']) : $data['members']) : $project->members;
-
-    //     // $project->update([
-    //     //     'name' => $data['name'],
-    //     //     'client' => $data['client'],
-    //     //     'status' => $data['status'],
-    //     //     'description' => $data['description'],
-    //     //     'contact' => $data['contact'],
-    //     //     'startdate' => $data['startdate'],
-    //     //     'enddate' => $data['enddate'],
-    //     //     'members' => 
-    //     //     // 'members' => json_encode(['$members']),
-    //     //     'members' => isset($data['members']) ? json_encode($data['members']) : $project->members,
-    //     // ]);
-
-    //     return redirect()->route('project.index')->with('success', 'Data Updated Successfully.');
-    // }
 
     public function update(Request $request, string $id)
     {
@@ -124,16 +82,15 @@ class ProjectController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'client' => 'required',
-            'status' => 'required',
             'description' => 'required',
             'contact' => 'required',
             'startdate' => 'required',
             'enddate' => 'required',
-            'members' => 'required|array',
+            'employee' => 'required|array',
         ]);
 
         $cred = Project::find($id)->update($data);
-        $project = Project::findOrFail($id);
+        // $project = Project::findOrFail($id);
         $cred = DB::table('projects')->update([
             'name' => $request->name,
             'client' => $request->client,
@@ -142,7 +99,7 @@ class ProjectController extends Controller
             'contact' => $request->contact,
             'startdate' => $request->startdate,
             'enddate' => $request->enddate,
-            'members' => json_encode($request->members),
+            'employee' => json_encode($request->members),
         ]);
         return redirect()->route('project.index')->with('success', 'Data Update Successfully..');
     }

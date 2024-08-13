@@ -53,8 +53,49 @@
                     <input type="date" class="form-control" placeholder="enter end date" name="enddate"
                         value="{{ $project->enddate }}">
                 </div>
+                   <div class="col-4 mt-2">
+                    <select class="form-control" name="employee" id="emp">
+                        @foreach ($user as $dd)
+                        @if($dd->role === "employee")
+                            <option value="{{$dd->id}}">{{$dd->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    {{-- <div class="">
+                        <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            placeholder="Assign to developer">
+                            Assign to Developer
+                        </button>
+                        <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkbox1" name="members[]"
+                                    value="faizan">
+                                <label class="form-check-label" for="checkbox1">Faizan</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkbox2" name="members[]"
+                                    value="vikash">
+                                <label class="form-check-label" for="checkbox2">Vikash</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkbox3" name="members[]"
+                                    value="abhisek">
+                                <label class="form-check-label" for="checkbox3">Abhisek</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkbox4" name="members[]"
+                                    value="rachit">
+                                <label class="form-check-label" for="checkbox4">Rachit</label>
+                            </div>
+                        </div>
+                    </div> --}}
+                    @error('members')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
-                <div class="col-4 mt-2">
+                {{-- <div class="col-4 mt-2">
                     <div class="">
                         <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -88,7 +129,7 @@
                     @error('assign')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-12 my-3">
                     <button class="btn btn-primary  col-12 text-light p-1">Submit</button>
                 </div>

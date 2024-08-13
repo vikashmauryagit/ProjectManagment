@@ -31,8 +31,10 @@ Route::get('/employee', [UserController::class, 'create'])->name('employee');
 Route::post('/employeeregister', [UserController::class, 'store'])->name('employeeregi');
 Route::get('/employeeindex', [UserController::class, 'index'])->name('employindex');
 Route::get('/user/search', [UserController::class, 'search'])->name('user.search');
+// Route::get('/retrivedata',[UserController::class,'retrivedata'])->name('retrivedata');
 
 
 Route::resource('project', ProjectController::class);
+// Route::get('/project1',[ProjectController::class,'editdash'])->name('project1');
 Route::get('/viewproject', [ProjectController::class, 'view'])->name('projectview');
 Route::get('/search/project', [ProjectController::class, 'search'])->name("project.search");

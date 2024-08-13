@@ -40,7 +40,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('show')}}" class="nav-link active">
+                            <a href="{{ route('show') }}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Dashboard v1</p>
                             </a>
@@ -56,43 +56,66 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @if (Auth::user() && Auth::user()->role === 'admin')
+                            <li class="nav-item">
+                                <a href="{{ route('project.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Project</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('project.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View Project</p>
+                                </a>
+                            </li>
+                        @elseif(Auth::user()->role !== 'admin')
+                            <li class="nav-item">
+                                <a href="{{ route('project.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View Project</p>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
-                            <a href="{{ route('project.create') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Add Project</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('project.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View Project</p>
-                            </a>
+                            <h2>Data Not Found</h2>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Employee
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('employee') }}" class="nav-link">
+                    @if (Auth::user() && Auth::user()->role === 'admin')
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Employee
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ route('employee') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Employee</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('employindex') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View Employee</p>
+                                </a>
+                            </li>
+                        @else
+                            {{-- <li class="nav-item">
+                            <a href="{{ route('employindex') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add Employee</p>
+                                <p>Employee Can see</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('employindex')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View Project</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        </li> --}}
+                    @endif
+
+            </ul>
+            </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
