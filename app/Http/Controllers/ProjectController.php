@@ -46,9 +46,8 @@ class ProjectController extends Controller
             'contact' => 'required',
             'startdate' => 'required',
             'enddate' => 'required',
-            'employee' => 'required',
+            'employee' => 'required|array',
         ]);
-
         $project = new Project();
         $project->emp_id = $request->emp_id;
         $project->name = $request->name;
@@ -58,51 +57,95 @@ class ProjectController extends Controller
         $project->contact = $request->contact;
         $project->startdate = $request->startdate;
         $project->enddate = $request->enddate;
-        $project->employee=$request->employee;
-        // $project->employee = explode(" ",$request->employee);
-        // $project->employee = json_encode(explode(" ", $request->employee));
-        $employees = $request->input('employee');
-        $project->employee = json_encode($employees);
+        $project->employee=json_encode($request->employee);
         $project->save();
 
         return redirect()->route('project.index')->with('success', 'Data Store Successfully..');
     }
+    // public function edit(string $id)
+    // {
+    //     $project = Project::find($id);
+    //     $user = DB::table('users')->get();
+
+    //     return $project;
+
+
+    //     // return view('Project.edit', compact('project', 'user'));
+    // }
     public function edit(string $id)
-    {
-        $project = Project::find($id);
-        $user = DB::table('users')->get();
+{
+    $project = Project::find($id);
+    $user = DB::table('users')->get();
 
-        return view('Project.edit', compact('project', 'user'));
+    if ($project) {
+        $project->employee = json_decode($project->employee, true); 
     }
 
+    // return $project;
+    return view('Project.edit', compact('project', 'user'));
+}
 
-    public function update(Request $request, string $id)
-    {
 
-        $data = $request->validate([
-            'name' => 'required',
-            'client' => 'required',
-            'description' => 'required',
-            'contact' => 'required',
-            'startdate' => 'required',
-            'enddate' => 'required',
-            'employee' => 'required|array',
-        ]);
+public function update(Request $request, string $id)
+{
+    // Validate the incoming request data
+    $data = $request->validate([
+        'name' => 'required',
+        'client' => 'required',
+        'status' => 'required',
+        'description' => 'required',
+        'contact' => 'required',
+        'startdate' => 'required',
+        'enddate' => 'required',
+        'employee' => 'required|array', // Ensure employee is an array
+    ]);
 
-        $cred = Project::find($id)->update($data);
-        // $project = Project::findOrFail($id);
-        $cred = DB::table('projects')->update([
-            'name' => $request->name,
-            'client' => $request->client,
-            'status' => $request->status,
-            'description' => $request->description,
-            'contact' => $request->contact,
-            'startdate' => $request->startdate,
-            'enddate' => $request->enddate,
-            'employee' => json_encode($request->members),
-        ]);
-        return redirect()->route('project.index')->with('success', 'Data Update Successfully..');
-    }
+    // Find the project by ID
+    $project = Project::findOrFail($id);
+
+    // Update the project with validated data
+    $project->update([
+        'name' => $request->name,
+        'client' => $request->client,
+        'status' => $request->status,
+        'description' => $request->description,
+        'contact' => $request->contact,
+        'startdate' => $request->startdate,
+        'enddate' => $request->enddate,
+        'employee' => json_encode($request->employee), // Correct field name and JSON encode
+    ]);
+
+    // Redirect to the project index with a success message
+    return redirect()->route('project.index')->with('success', 'Data updated successfully.');
+}
+
+    // public function update(Request $request, string $id)
+    // {
+
+    //     $data = $request->validate([
+    //         'name' => 'required',
+    //         'client' => 'required',
+    //         'description' => 'required',
+    //         'contact' => 'required',
+    //         'startdate' => 'required',
+    //         'enddate' => 'required',
+    //         'employee' => 'required|array',
+    //     ]);
+
+    //     $cred = Project::find($id)->update($data);
+    //     // $project = Project::findOrFail($id);
+    //     $cred = DB::table('projects')->update([
+    //         'name' => $request->name,
+    //         'client' => $request->client,
+    //         'status' => $request->status,
+    //         'description' => $request->description,
+    //         'contact' => $request->contact,
+    //         'startdate' => $request->startdate,
+    //         'enddate' => $request->enddate,
+    //         'employee' => json_encode($request->members),
+    //     ]);
+    //     return redirect()->route('project.index')->with('success', 'Data Update Successfully..');
+    // }
     public function destroy(string $id)
     {
         //

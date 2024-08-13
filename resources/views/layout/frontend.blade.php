@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet"
-        href="{{ asset('admin/https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}">
+        href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -66,18 +66,7 @@
             @yield('content')
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        {{-- <div class="row">
-            <div class="col-12">
-                <footer class="main-footer text-center">
-                    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-                    All rights reserved.
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 3.2.0
-                    </div>
-                </footer>
-            </div>
-        </div> --}}
+        
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -89,6 +78,9 @@
 
     <!-- jQuery -->
 
+
+
+    @yield('scriptFile')
     <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -139,7 +131,7 @@
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="{{('dist/js/demo.js')}}"></script> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ 'admin/dist/js/pages/dashboard.js' }}"></script>
+    <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>

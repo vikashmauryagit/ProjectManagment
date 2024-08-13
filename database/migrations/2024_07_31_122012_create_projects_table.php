@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('enddate');
             $table->foreignId('emp_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('status', ['incomplete', 'complete'])->default('incomplete',);
-            $table->json('employee')->nullable();
+            $table->text('employee')->nullable();
             $table->timestamps();
         });
     }
